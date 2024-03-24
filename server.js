@@ -3,6 +3,7 @@ import http from "http";
 import path from "path";
 
 import updater from "./lib/server/updater.js";
+import initAPI from "./api/index.js";
 
 const PORT = 1930;
 
@@ -17,6 +18,7 @@ app.use(express.static(publicPath));
 updater(server, publicPath);
 
 const main = async () => {
+  await initAPI(app);
   server.listen(PORT, () => {
     console.log(`Server started. Now open http://localhost:${PORT}/ in your browser.`);
   });
